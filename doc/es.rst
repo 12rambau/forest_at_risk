@@ -1,5 +1,5 @@
-Module_name
-===========
+forest at risk
+==============
 
 .. warning::
 
@@ -7,4 +7,4 @@ Module_name
 
 .. tip::
 
-    Por favor, abre una incidencia en su repositorio : https://github.com/12rambau/sepal_ui_template/issues/new
+    Por favor, abre una incidencia en su repositorio : https://github.com/12rambau/forest_at_risk/issues/new
