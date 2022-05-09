@@ -7,3 +7,5 @@ module_dir = Path.home() / "module_results"
 module_dir.mkdir(exist_ok=True)
 
 # add all the directory that will be used in the app.
+down_dir = module_dir / "forest_at_risk"
+down_dir.mkdir(exist_ok=True)

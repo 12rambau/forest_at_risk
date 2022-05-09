@@ -21,14 +21,16 @@
             },
             "error": {
                 "no_aoi": "Select an AOI first",
-                "no_data": "Select source dataset"
+                "no_data": "Select source dataset",
+                "not_covered": "The area of interest is not covered by the selected dataset"
             }
         },
         "var": {
             "stepper": "variables"
         },
         "compute": {
-            "stepper": "compute"
+            "stepper": "compute",
+            "btn": "Compute Forest Risk"
         }
     }
 }

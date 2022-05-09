@@ -39,6 +39,13 @@ class FCCView(sw.Tile):
         self.widgets = [self.w_source, self.w_start, self.w_end]
         self._update_aoi(None)
 
+        # link to the object
+        (
+            self.model.bind(self.w_source, "fcc_source")
+            .bind(self.w_start, "fcc_start")
+            .bind(self.w_end, "fcc_end")
+        )
+
         # create the view
         super().__init__("nested", "", inputs=self.widgets)
 

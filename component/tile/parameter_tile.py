@@ -25,7 +25,7 @@ class ParameterTile(sw.Tile):
         # set up the stepper content
         fcc_step = cw.StepperContent(1, FCCView(self.far_model, self.aoi_model))
         var_step = cw.StepperContent(2, VarView(self.far_model))
-        compute_step = cw.StepperContent(3, ComputeView(self.far_model))
+        compute_step = cw.StepperContent(3, ComputeView(self.far_model, self.aoi_model))
         content = sw.StepperItems(children=[fcc_step, var_step, compute_step])
 
         stepper = sw.Stepper(alt_labels=True, children=[header, content])
