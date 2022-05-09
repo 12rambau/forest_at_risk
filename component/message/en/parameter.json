@@ -1,0 +1,13 @@
+{
+    "param": {
+        "fcc": {
+            "stepper": "fcc"
+        },
+        "var": {
+            "stepper": "variables"
+        },
+        "compute": {
+            "stepper": "compute"
+        }
+    }
+}
