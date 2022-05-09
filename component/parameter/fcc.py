@@ -5,7 +5,7 @@ fcc_sources = {
         "end": 2020,
     },
     "TMF": {
-        "asset": "projects/JRC/TMF/v1_2020/AnnualChanges",
+        "asset": "projects/JRC/TMF/v1_2021/AnnualChanges",
         "start": 1990,
         "end": 2021,
     },

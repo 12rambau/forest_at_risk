@@ -28,6 +28,18 @@ class ComputeView(sw.Tile):
         grid = cs.generate_grid(self.aoi_model)
 
         # download the raw images
+        # fcc23_image = cs.get_fcc(self.model.fcc_source, self.model.fcc_start, self.model.fcc_end)
+        # download_params = {"image",
+        #    "sources": sources,
+        #    "bands": bands,
+        ##    "ee_buffers": ee_buffers,
+        #   "year": year,
+        #   "descriptions": descriptions,
+
+        #        }
+
+        # for buffer in ee_buffers:
+        #    down_buffer(buffer, **download_params)
 
         # compute stuff
 

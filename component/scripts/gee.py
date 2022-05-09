@@ -25,7 +25,7 @@ def generate_grid(aoi_model):
         aoi (sw.AoiModel): the model of the AOI
 
     Returns:
-        (ee.FeatureCollection): the grid
+        (gdf): the grid
     """
 
     # check if the aoi have already been grided
@@ -34,8 +34,7 @@ def generate_grid(aoi_model):
 
     path = raw_dir / f"{aoi_model.name}_grid.geojson"
     if path.is_file():
-        grid = gpd.read_file(path)
-        return geojson_to_ee(grid.__geo_interface__)
+        return gpd.read_file(path)
 
     # get the shape of the aoi in EPSG:4326 proj
     aoi_gdf = aoi_model.gdf.to_crs("EPSG:3857")
@@ -104,7 +103,7 @@ def generate_grid(aoi_model):
     # export the grid as a json file
     grid.to_file(path, driver="GeoJSON")
 
-    return geojson_to_ee(grid.__geo_interface__)
+    return grid
 
 
 def geojson_to_ee(geo_json, geodesic=False, encoding="utf-8"):
@@ -112,10 +111,12 @@ def geojson_to_ee(geo_json, geodesic=False, encoding="utf-8"):
     Transform a geojson object into a featureCollection
     No sanity check is performed on the initial geo_json. It must respect the
     `__geo_interface__ <https://gist.github.com/sgillies/2217756>`__.
+
     Args:
         geo_json (dict): a geo_json dictionnary
         geodesic (bool, optional): Whether line segments should be interpreted as spherical geodesics. If false, indicates that line segments should be interpreted as planar lines in the specified CRS. If absent, defaults to True if the CRS is geographic (including the default EPSG:4326), or to False if the CRS is projected. Defaults to False.
         encoding (str, optional): The encoding of characters. Defaults to "utf-8".
+
     Returns:
         (ee.FeatureCollection): the created featurecollection
     """
