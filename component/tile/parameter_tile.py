@@ -2,6 +2,7 @@ from sepal_ui import sepalwidgets as sw
 
 from component.model import FARModel
 from component.message import cm
+from component import widget as cw
 
 from .fcc_view import *
 from .var_view import *
@@ -16,42 +17,18 @@ class ParameterTile(sw.Tile):
         self.aoi_model = aoi_model
 
         # create the stepper header
-        fcc_step = sw.StepperStep(
-            key=1,
-            step=1,
-            complete=False,
-            editable=True,
-            children=[cm.param.fcc.stepper],
-        )
-        var_step = sw.StepperStep(
-            key=2,
-            step=2,
-            complete=False,
-            editable=True,
-            children=[cm.param.var.stepper],
-        )
-        compute_step = sw.StepperStep(
-            key=3,
-            step=3,
-            complete=False,
-            editable=True,
-            children=[cm.param.compute.stepper],
-        )
+        fcc_step = cw.StepperStep(1, cm.param.fcc.stepper)
+        var_step = cw.StepperStep(2, cm.param.var.stepper)
+        compute_step = cw.StepperStep(3, cm.param.compute.stepper)
         header = sw.StepperHeader(children=[fcc_step, var_step, compute_step])
 
-        content = sw.StepperItems(
-            children=[
-                sw.StepperContent(
-                    key=1, step=1, children=[FCCView(self.far_model, self.aoi_model)]
-                ),
-                sw.StepperContent(key=2, step=2, children=[VarView(self.far_model)]),
-                sw.StepperContent(
-                    key=3, step=3, children=[ComputeView(self.far_model)]
-                ),
-            ]
-        )
+        # set up the stepper content
+        fcc_step = cw.StepperContent(1, FCCView(self.far_model, self.aoi_model))
+        var_step = cw.StepperContent(2, VarView(self.far_model))
+        compute_step = cw.StepperContent(3, ComputeView(self.far_model))
+        content = sw.StepperItems(children=[fcc_step, var_step, compute_step])
 
         stepper = sw.Stepper(alt_labels=True, children=[header, content])
 
         # createt the tile
-        super().__init__("parameter_tile", "Parameters", inputs=[stepper])
+        super().__init__("parameter_tile", cm.param.title, inputs=[stepper])

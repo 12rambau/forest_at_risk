@@ -7,7 +7,7 @@ def is_tmf_covered(geometry):
     """return true if there is more than 0 images"""
 
     return (
-        ee.ImageCollection(cp.gee_asset_id["TMF"])
+        ee.ImageCollection(cp.fcc_sources["TMF"]["asset"])
         .filterBounds(geometry)
         .size()
         .getInfo()

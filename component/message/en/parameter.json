@@ -1,7 +1,28 @@
 {
     "param": {
+        "title": "Parameters",
         "fcc": {
-            "stepper": "fcc"
+            "stepper": "fcc",
+            "sources": {
+                "GFC": "Global Forest Change",
+                "TMF": "Tropical Moist Forest"
+            },
+            "widget": {
+                "source": {
+                    "lbl": "source of the forest cover change"
+                },
+                "start": {
+                    "lbl": "from"
+                },
+                "end": {
+                    "lbl": "to"
+                    
+                }
+            },
+            "error": {
+                "no_aoi": "Select an AOI first",
+                "no_data": "Select source dataset"
+            }
         },
         "var": {
             "stepper": "variables"
