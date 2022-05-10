@@ -1,4 +1,5 @@
 from sepal_ui import sepalwidgets as sw
+from sepal_ui.scripts import utils as su
 
 from component.message import cm
 from component import scripts as cs
@@ -22,24 +23,30 @@ class ComputeView(sw.Tile):
         # add js behaviours
         self.btn.on_event("click", self.compute_far)
 
+    @su.loading_button(debug=True)
     def compute_far(self, widget, event, data):
 
         # create the feature collection grid
         grid = cs.generate_grid(self.aoi_model)
+        total = len(grid)
 
-        # download the raw images
-        # fcc23_image = cs.get_fcc(self.model.fcc_source, self.model.fcc_start, self.model.fcc_end)
-        # download_params = {"image",
-        #    "sources": sources,
-        #    "bands": bands,
-        ##    "ee_buffers": ee_buffers,
-        #   "year": year,
-        #   "descriptions": descriptions,
+        # aggregate all the images to download
+        image_dict = {}
+        image_dict["fcc23"] = cs.get_fcc(
+            self.model.fcc_source, self.model.fcc_start, self.model.fcc_end
+        )
 
-        #        }
+        # download all the images to the raw folder
+        for name, image in image_dict.items():
+            cs.download_image(
+                image=image,
+                grid=grid,
+                aoi_name=self.aoi_model.name,
+                layer=name,
+                alert=self.alert,
+            )
 
-        # for buffer in ee_buffers:
-        #    down_buffer(buffer, **download_params)
+        self.alert.add_msg("download complete")
 
         # compute stuff
 

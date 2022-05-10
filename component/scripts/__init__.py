@@ -4,3 +4,4 @@
 # if you use a module import all the functions here to only have 1 call to make
 from .fcc import *
 from .gee import *
+from .grid import *

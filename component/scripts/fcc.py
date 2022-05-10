@@ -35,15 +35,15 @@ def get_fcc(source, start, end):
         # Forest in start date
         ap_start = ap_all_year.select(list(range(b_start, b_final)))
         forest_start = ap_start.reduce(ee.Reducer.sum()).gte(1)
+        forest_mask = forest_start.eq(1)
 
         # Forest in end date
         ap_end = ap_all_year.select(list(range(b_end, b_final)))
         forest_end = ap_end.reduce(ee.Reducer.sum()).gte(1)
 
-        # Forest raster with 2 bands
-        forest = forest_start.addBands(forest_end)
-        forest = forest.select([0, 1], ["forest_start", "forest_end"])
-        forest = forest.set("system:bandNames", ["forest_start", "forest_end"])
+        # final deforestation map
+        # 0 where there is deforestation, 1 where it's not, nodata where it was no forest
+        forest = forest_end.subtract(forest_start).mask(forest_mask).add(1)
 
     elif source == "GFC":
 
@@ -71,11 +71,11 @@ def get_fcc(source, start, end):
 
         # Forest
         forest_start = forest2000.where(loss_start.eq(1), 0)
+        forest_mask = forest_start.eq(1)
         forest_end = forest2000.where(loss_end.eq(1), 0)
 
-        # Forest raster with 2 bands
-        forest = forest_start.addBands(forest_end)
-        forest = forest.select([0, 1], ["forest_start", "forest_end"])
-        forest = forest.set("system:bandNames", ["forest_start", "forest_end"])
+        # final deforestation map
+        # 0 where there is deforestation, 1 where it's not, nodata where it was no forest
+        forest = forest_end.subtract(forest_start).mask(forest_mask).add(1)
 
-    return forest
+    return forest.int8()
