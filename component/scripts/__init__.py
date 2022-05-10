@@ -5,3 +5,5 @@
 from .fcc import *
 from .gee import *
 from .grid import *
+from .elevation import *
+from .wdpa import *

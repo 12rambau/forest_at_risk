@@ -35,6 +35,9 @@ class ComputeView(sw.Tile):
         image_dict["fcc23"] = cs.get_fcc(
             self.model.fcc_source, self.model.fcc_start, self.model.fcc_end
         )
+        image_dict["elevation"] = cs.get_elevation()
+        image_dict["slope"] = cs.get_slope()
+        image_dict["wdpa"] = cs.get_wdpa()
 
         # download all the images to the raw folder
         for name, image in image_dict.items():
