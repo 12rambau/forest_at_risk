@@ -28,9 +28,8 @@
         "var": {
             "stepper": "variables"
         },
-        "compute": {
-            "stepper": "compute",
-            "btn": "Compute Forest Risk"
+        "advance": {
+            "stepper": "advance parameters"
         }
     }
 }
